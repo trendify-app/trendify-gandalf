@@ -4,6 +4,7 @@
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'trendify-web',
+    podModulePrefix: 'trendify-web/pods',
     environment,
     rootURL: '/',
     locationType: 'auto',
