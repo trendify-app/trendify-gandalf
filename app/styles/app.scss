@@ -1,0 +1,31 @@
+@import 'ember-paper';
+
+
+.header {
+    .title, .start-container {
+        padding: 20% 0% 20% 0%;
+        margin: auto;
+        text-align: center;
+        font-size: 4rem;
+    }
+    .start-container {
+        width: 30%;
+        justify-content: space-between;
+        .md-button {
+            min-height: 80px;
+            min-width: 160px;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.ember-application {
+    background: rgba(255,255,255,1);
+background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(43%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1)));
+background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
+background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
+background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
+background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );
+}
