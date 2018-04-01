@@ -7,9 +7,8 @@ export default Component.extend({
             title: "Share"
         }
     ],
-    actions: {
-        startGame () {
 
-        }
+    actions: {
+
     }
 });

@@ -1,7 +1,7 @@
 {{#if (eq name 'host')}}
-    {{game-host startGame=(action 'game_start') data=hostModel}}
+    {{game-host startGame=(action 'game_start') data=currentModel}}
 {{else}}
-    {{game-player data=playerModel}}
+    {{game-player data=currentModel}}
 {{/if}}
 
 {{yield}}
