@@ -10,17 +10,16 @@
         </div>
     </div>
 {{#if (eq data.gameState 'lobby')}}
-    <div class="lobby layout-column layout-align-center"> 
+    <div class="lobby layout-column layout-align-center">
         <div class="players layout-row layout-align-center flex-50">
             {{#each data.users as |user|}}
                 <span class="player flex">
-                    {{user.name}}
-                    
+                  {{user.name}}
                 </span>
             {{/each}}
         </div>
         <div class="scoreboard layout-column flex-20">
-            
+
         </div>
         {{paper-divider}}
         <div class="start-game layout-column flex-20">
@@ -32,39 +31,20 @@
     <div class="chart layout-column flex-10">
         {{chart-card data=data.trendData}}
     </div>
-    <div class="scoreboard layout-column flex-10">
-        {{#each users as |user|}}
-            {{user.name}}
-            {{user.score}}
-        {{/each}}
-    </div>    
 {{else if (eq data.gameState 'intermission')}}
     <div class="chart layout-column flex-10">
         {{chart-card data=data.trendData}}
     </div>
     <div class="scoreboard layout-column flex-10">
-        {{player-scores users=data.users}}
-    </div>  
+      {{#each sortedUsers as |user|}}
+        <div class='score'>
+          {{user.name}} - score = {{user.score}}
+        </div>
+      {{/each}}
+    </div>
     <div class="start-game layout-column flex-20">
         {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Next Round{{/paper-button}}
     </div>
 {{/if}}
 </div>
-{{!-- {{#if enrolled}}
-    {{#paper-dialog fullscreen=fullscreen onClose=(action "closePromptDialog" "cancel")}}
-
-    {{#paper-dialog-content}}
-      <h2 class="md-title">What will your name be?</h2>
-      {{paper-input placeholder="My Awesome Name" autofocus=true value=name onChange=(action (mut name))}}
-    {{/paper-dialog-content}}
-
-    {{#paper-dialog-actions class="layout-row"}}
-      <span class="flex"></span>
-      {{#paper-button primary=true onClick=(action "closePromptDialog" "ok" dogName)}}Okay!{{/paper-button}}
-    {{/paper-dialog-actions}}
-
-  {{/paper-dialog}}
-{{/if}} --}}
-
-
 {{yield}}
