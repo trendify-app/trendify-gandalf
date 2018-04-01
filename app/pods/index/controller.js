@@ -1,54 +1,60 @@
 import Controller from '@ember/controller';
+import fetch from 'fetch';
 
 export default Controller.extend({
-    websockets: Ember.inject.service(),
-    socketRef: null,
-    didInsertElement() {
-        this._super(...arguments);
-        const socket = this.get('websockets').socketFor('ws://localhost:7000/');
-
-        socket.on('open', this.myOpenHandler, this);
-        socket.on('message', this.myMessageHandler, this);
-        socket.on('close', this.myCloseHandler, this);
-    
-        this.set('socketRef', socket);
-    },
-
-    willDestroyElement() {
-        this._super(...arguments);
-
-        const socket = this.get('socketRef');
-
-        /*
-            4. The final step is to remove all of the listeners you have setup.
-        */
-        socket.off('open', this.myOpenHandler);
-        socket.off('message', this.myMessageHandler);
-        socket.off('close', this.myCloseHandler);
-    },
-
-    myOpenHandler(event) {
-        console.log(`On open event has been called: ${event}`);
-    },
-
-    myMessageHandler(event) {
-        console.log(`Message: ${event.data}`);
-    },
-
-    myCloseHandler(event) {
-        console.log(`On close event has been called: ${event}`);
-    },
-    
     actions: {
         host () {
-            this.transitionToRoute('session.session_id', sessionObj);
+            fetch('http://localhost:8080/api/sessions/create',
+            {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://localhost:8080/api/sessions/create",
+                "method": "POST"
+            }).
+            then(response => {
+                response.json().
+                then(response => {
+                    localStorage['room_id'] = response.room_id
+                    fetch('http://localhost:8080/api/sessions/join/' + response.room_id, {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "http://localhost:8080/api/sessions/join/" + response.room_id,
+                        "method": "PUT"
+                    }).
+                    then(response => {
+                        response.json().
+                        then(response => {
+                            localStorage['accessPass'] = response.access_pass
+                            this.transitionToRoute('sessions', {
+                                session_id: localStorage['room_id']
+                            });
+                        })
+                    });
+                })   
+            });
         },
         join () {
 
-        },
-        sendButtonPressed() {
-            const socket = this.get('socketRef');
-            socket.send('Hello Websocket World');
         }
     }
 });
+
+
+// /sessions/create => session_id
+// /sessions/join?token=${token} {session_id: <>}
+//   - accessPass
+
+// cache last attempt
+
+// transitionTo game route
+//  - pass contextual information
+//  - session attempting to join in url
+
+// localStorage['a'] = 1
+
+
+// socket.on('connect', (id) => {
+//   socket.emit('handshake', accessPass, () => {
+   
+//   })
+// }
