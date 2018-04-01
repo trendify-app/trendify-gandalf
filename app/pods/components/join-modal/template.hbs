@@ -1,0 +1,13 @@
+{{#paper-dialog onClose=onClose}}
+  {{#paper-dialog-content}}
+    <h2 class="md-title">Join Session by ID</h2>
+    {{paper-input placeholder="Session ID" autofocus=true value=sessionId onChange=onValueChange}}
+  {{/paper-dialog-content}}
+
+  {{#paper-dialog-actions class="layout-row"}}
+    <span class="flex"></span>
+    {{#paper-button primary=true onClick=onClose}}Cancel{{/paper-button}}
+    {{#paper-button primary=true onClick=onSubmit}}Okay!{{/paper-button}}
+  {{/paper-dialog-actions}}
+
+{{/paper-dialog}}

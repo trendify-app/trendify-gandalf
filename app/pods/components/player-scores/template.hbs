@@ -1,12 +1,9 @@
 <div class="layout-row">
-    {{#each users as |user|}}
-        <div class="user card">
-            {{user.name}}
-            {{user.score}}
-        </div>
-        
-    {{/each}}
-
+  {{#each users as |user|}}
+    <div class="user card">
+        {{user.name}}
+        {{user.score}}
+    </div>
+  {{/each}}
 </div>
-
 {{yield}}

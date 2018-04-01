@@ -1,8 +1,57 @@
+<div class='game'>
+  {{#paper-toolbar class='header'}}
+    {{#paper-toolbar-tools}}
+      {{#paper-button iconButton=true}}
+        {{paper-icon "menu"}}
+      {{/paper-button}}
+      <div class='title'>
+        <div class='primary'>
+          Trendify
+        </div>
+        {{#if currentModel.room}}
+          <div class='secondary'>
+            Current room: {{currentModel.room}}
+          </div>
+        {{/if}}
+      </div>
+      {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
+  <div class='content'>
 
-{{#if (eq name 'host')}}
-    {{game-host startGame=(action 'game_start') data=currentModel}}
-{{else}}
-    {{game-player data=currentModel}}
+    <div class='header'>
+      {{#if (eq currentModel.gameState 'round')}}
+        <div class='tertiary'>
+          {{paper-progress-circular
+              value=(mult
+                (div (moment-diff
+                  (now interval=1000)
+                  (moment currentModel.rounds.ends_at)) 1000)
+                  (div 100 60))
+          }}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class='body'>
+      {{#if name}}
+        {{#if (eq name 'host')}}
+          {{game-host
+            startGame=(action 'game_start')
+            data=currentModel
+          }}
+        {{else}}
+          {{game-player data=currentModel}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+{{#if showEnrollModal}}
+  {{enroll-modal
+    onNameChange=(action (mut enrollName))
+    onSubmit=(action 'set_name' enrollName)
+    onClose=(action (mut showEnrollModal) false)
+    name=enrollName
+  }}
 {{/if}}
-
-{{yield}}

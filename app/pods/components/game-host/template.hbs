@@ -1,26 +1,14 @@
 <div class="layout-column">
-    <div class="title layout-row flex-10">
-        <h1>Trendify</h1>
-        <div class="layout-column">
-            <h2 class="flex-10">{{data.room}}</h2>
-            {{#if (eq data.gameState 'round')}}
-                {{paper-progress-circular value=(mult (div (moment-diff (now interval=1000) (moment data.rounds.ends_at)) 1000) (div 100 60))}}
-                {{!-- <h2 class="time">{{floor (div (moment-diff (now interval=1000) (moment data.rounds.ends_at)) 1000)}}</h2> --}}
-            {{/if}}
-        </div>
-    </div>
 {{#if (eq data.gameState 'lobby')}}
-    <div class="lobby layout-column layout-align-center"> 
+    <div class="lobby layout-column layout-align-center">
         <div class="players layout-row layout-align-center flex-50">
             {{#each data.users as |user|}}
-                <span class="player flex">
-                    {{user.name}}
-                    
-                </span>
+              <span class="player flex">
+                <div class='pod'>
+                  {{user.name}}
+                </div>
+              </span>
             {{/each}}
-        </div>
-        <div class="scoreboard layout-column flex-20">
-            
         </div>
         {{paper-divider}}
         <div class="start-game layout-column flex-20">
@@ -33,38 +21,20 @@
         {{chart-card data=data.trendData}}
     </div>
     <div class="scoreboard layout-column flex-10">
-        {{#each users as |user|}}
+        {{#each data.users as |user|}}
             {{user.name}}
             {{user.score}}
         {{/each}}
-    </div>    
+    </div>
 {{else if (eq data.gameState 'intermission')}}
     <div class="chart layout-column flex-10">
         {{chart-card data=data.trendData}}
     </div>
     <div class="scoreboard layout-column flex-10">
         {{player-scores users=data.users}}
-    </div>  
+    </div>
     <div class="start-game layout-column flex-20">
         {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Next Round{{/paper-button}}
     </div>
 {{/if}}
 </div>
-{{!-- {{#if enrolled}}
-    {{#paper-dialog fullscreen=fullscreen onClose=(action "closePromptDialog" "cancel")}}
-
-    {{#paper-dialog-content}}
-      <h2 class="md-title">What will your name be?</h2>
-      {{paper-input placeholder="My Awesome Name" autofocus=true value=name onChange=(action (mut name))}}
-    {{/paper-dialog-content}}
-
-    {{#paper-dialog-actions class="layout-row"}}
-      <span class="flex"></span>
-      {{#paper-button primary=true onClick=(action "closePromptDialog" "ok" dogName)}}Okay!{{/paper-button}}
-    {{/paper-dialog-actions}}
-
-  {{/paper-dialog}}
-{{/if}} --}}
-
-
-{{yield}}

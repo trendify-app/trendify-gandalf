@@ -4,7 +4,7 @@ export default Component.extend({
     socketIOService: Ember.inject.service('socket-io'),
     gameState: 'lobby',
     myVote: '',
-    name: 'host',
+    name: null,
     rounds: {
         round_number: 1,
         total_rounds: 5,
@@ -34,40 +34,45 @@ export default Component.extend({
             trendData: this.get('trendData'),
             users: this.get('users'),
             challenge: this.get('challenge'),
-            room: localStorage['room_id']
+            room: this.get('sessionId')
         }
         console.log(x)
         return x
     }),
     trendData: {},
-    
+
     didInsertElement() {
         this._super(...arguments);
 
         this.socket = this.get('socketIOService').socketFor('http://localhost:8080/');
         this.socket.on('connect', this.onConnect, this);
         this.socket.on('update', event => {
-            console.log(event.type, event);
-            this.send(`update_${event.type}`, event)
+          console.log(event.type, event);
+          this.send(`update_${event.type}`, event)
         });
+
+        this.socket.on('should-enroll', _ => {
+          console.log('should-enroll');
+          this.set('showEnrollModal', true);
+        })
         /*
             4. It is also possible to set event handlers on specific events
         */
         //socket.on('myCustomEvent', () => { socket.emit('anotherCustomEvent', 'some data'); });
     },
-    
+
     onConnect() {
         //debugger
-        this.socket.emit('handshake', localStorage['accessPass']);
+        this.socket.emit('handshake', this.get('accessPass'));
     },
-    
+
     myCustomEvent(data) {
         this.socket.emit('anotherCustomEvent', 'some data');
     },
-    
+
     willDestroyElement() {
         this._super(...arguments);
-        this.socket.emit('exit', localStorage['accessPass']);
+        this.socket.emit('exit', this.get('accessPass'));
         //socket.off('message', this.onMessage);
         //socket.off('myCustomEvent', this.myCustomEvent);
     },
@@ -80,30 +85,32 @@ export default Component.extend({
             this.set('challenge', event.word)
         },
         update_state (event) {
-            console.log(event);
             this.set('gameState', event.state)
         },
         update_round_number (event) {
             this.set('rounds', event)
         },
         update_users (event) {
-            debugger
             this.set('users', event.users)
         },
 
         update_user (event) {
-            this.set('name', event.name)
+          this.set('name', event.name)
         },
 
         enroll_user (event) {
             //if(event.user_id == localStorage[''])
         },
         user_vote (word) {
-            
+
         },
         game_start () {
             console.log('nshoeu')
-            this.socket.emit('game_start', localStorage['accessPass']);
+            this.socket.emit('game_start', this.get('accessPass'));
         },
+        set_name (name) {
+          this.socket.emit('enroll', this.get('accessPass'), name);
+          this.set('showEnrollModal', false);
+        }
     }
 });

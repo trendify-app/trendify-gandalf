@@ -3,9 +3,16 @@
         <h1>Trendify</h1>
     </div>
 
-    
     <div class="layout-row layout-xs-column flex start-container flex-20">
         {{#paper-button onClick=(action "host") raised=true primary=true}}Host{{/paper-button}}
-        {{#paper-button onClick=(action "join") raised=true }}Join{{/paper-button}}
+        {{#paper-button onClick=(action (mut showJoinModal) true) raised=true }}Join{{/paper-button}}
     </div>
 </div>
+
+{{#if showJoinModal}}
+  {{join-modal
+    onClose=(action (mut showJoinModal) false)
+    onSubmit=(action 'join' joinSessionId)
+    onValueChange=(action (mut joinSessionId))
+    sessionId=joinSessionId}}
+{{/if}}

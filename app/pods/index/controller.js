@@ -10,8 +10,7 @@ export default Controller.extend({
                 "crossDomain": true,
                 "url": "http://localhost:8080/api/sessions/create",
                 "method": "POST"
-            }).
-            then(response => {
+            }).then(response => {
                 response.json().
                 then(response => {
                     localStorage['room_id'] = response.room_id
@@ -25,39 +24,24 @@ export default Controller.extend({
                         }
                     }).
                     then(response => {
-                        response.json().
-                        then(response => {
-                            localStorage['accessPass'] = response.access_pass
-                            this.transitionToRoute('sessions', {
-                                session_id: localStorage['room_id']
-                            });
+                        response.json().then(response => {
+                          // debugger
+                          localStorage['accessPass'] = response.access_pass
+                          this.transitionToRoute(`/sessions/${localStorage['room_id']}?accessPass=${response.access_pass}`);
                         })
                     });
-                })   
+                })
             });
         },
-        join () {
-
+        join (id) {
+          fetch(`http://localhost:8080/api/sessions/join/${id}`, {
+            "async": true,
+            "crossDomain": true,
+            "method": "PUT"
+          }).then(response => response.json())
+            .then(response => {
+              this.transitionToRoute(`/sessions/${id}?accessPass=${response.access_pass}`);
+            })
         }
     }
 });
-
-
-// /sessions/create => session_id
-// /sessions/join?token=${token} {session_id: <>}
-//   - accessPass
-
-// cache last attempt
-
-// transitionTo game route
-//  - pass contextual information
-//  - session attempting to join in url
-
-// localStorage['a'] = 1
-
-
-// socket.on('connect', (id) => {
-//   socket.emit('handshake', accessPass, () => {
-   
-//   })
-// }
