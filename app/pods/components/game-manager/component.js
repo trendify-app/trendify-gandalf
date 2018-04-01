@@ -525,7 +525,7 @@ export default Component.extend({
         }
       },
     hostModel: {
-        gameState: 'intermission',
+        gameState: 'lobby',
         roundEnd: 1000000000,
         myVote: '',
         name: 'host',
@@ -1074,9 +1074,10 @@ export default Component.extend({
     didInsertElement() {
         this._super(...arguments);
 
-        const socket = this.get('socketIOService').socketFor('http://localhost:8080/');
-        socket.on('connect', this.onConnect, this);
-        socket.on('update', event => {
+        this.socket = this.get('socketIOService').socketFor('http://localhost:8080/');
+        this.socket.on('connect', this.onConnect, this);
+        this.socket.on('update', event => {
+            console.log(event.type, event);
             this.sendAction(`update_${event.type}`, event)
         });
         /*
@@ -1086,28 +1087,24 @@ export default Component.extend({
     },
     
     onConnect() {
-        const socket = this.get('socketIOService').socketFor('http://localhost:8080/');
         //debugger
-        socket.emit('handshake', localStorage['accessPass']);
+        this.socket.emit('handshake', localStorage['accessPass']);
     },
     
     myCustomEvent(data) {
-        const socket = this.get('socketIOService').socketFor('http://localhost:8080/' + this.get('namespace'));
-        socket.emit('anotherCustomEvent', 'some data');
+        this.socket.emit('anotherCustomEvent', 'some data');
     },
     
     willDestroyElement() {
         this._super(...arguments);
-
-        const socket = this.get('socketService').socketFor('http://localhost:8080/' + this.get('namespace'));
-        socket.off('connect', this.onConnect);
+        this.socket.emit('exit', localStorage['accessPass']);
         //socket.off('message', this.onMessage);
         //socket.off('myCustomEvent', this.myCustomEvent);
     },
 
     actions: {
         update_state (event) {
-
+            console.log(event);
         },
         update_round_timer_start (event) {
             
@@ -1137,7 +1134,8 @@ export default Component.extend({
             
         },
         game_start () {
-            
+            console.log('nshoeu')
+            this.socket.emit('game_start', localStorage['accessPass']);
         },
     }
 });

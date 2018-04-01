@@ -16,7 +16,7 @@
         </div>
         {{paper-divider}}
         <div class="start-game layout-column flex-20">
-            {{#paper-button class="start-button" onClick=(action "startGame") raised=true primary=true}}Start Game{{/paper-button}}
+            {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Start Game{{/paper-button}}
         </div>
     </div>
 {{else if (eq data.gameState 'round')}}

@@ -19,7 +19,10 @@ export default Controller.extend({
                         "async": true,
                         "crossDomain": true,
                         "url": "http://localhost:8080/api/sessions/join/" + response.room_id,
-                        "method": "PUT"
+                        "method": "PUT",
+                        "headers": {
+                            Authorization: response.access_token
+                        }
                     }).
                     then(response => {
                         response.json().
