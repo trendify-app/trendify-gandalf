@@ -1,6 +1,15 @@
 
 {{#if (eq name 'host')}}
-    {{game-host startGame=(action 'game_start') data=currentModel}}
+    {{game-host startGame=(action 'game_start')
+      data=currentModel
+      users=users
+      gameState=gameState
+      trendData=trendData
+      challenge=challenge
+      rounds=rounds
+      name=name
+      room=room
+    }}
 {{else}}
     {{game-player data=currentModel}}
 {{/if}}

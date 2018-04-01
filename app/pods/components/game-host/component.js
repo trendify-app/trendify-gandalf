@@ -8,8 +8,8 @@ export default Component.extend({
             title: "Share"
         }
     ],
-    sortedUsers: Ember.computed('data.users', function () {
-      const users = this.get('data.users');
+    sortedUsers: Ember.computed('users', function () {
+      const users = this.get('users');
       return users.sort((a, b) => (a.score || 0) - (b.score || 0))
     })
 });

@@ -40,36 +40,29 @@ export default Component.extend({
         return x
     }),
     trendData: {},
-    
+
     didInsertElement() {
         this._super(...arguments);
-
         this.socket = this.get('socketIOService').socketFor('http://localhost:8080/');
         this.socket.on('connect', this.onConnect, this);
         this.socket.on('update', event => {
-            console.log(event.type, event);
-            this.send(`update_${event.type}`, event)
+          console.log(event.type, event);
+          this.send(`update_${event.type}`, event)
         });
+        this.set('room', localStorage['room_id'])
         /*
             4. It is also possible to set event handlers on specific events
         */
         //socket.on('myCustomEvent', () => { socket.emit('anotherCustomEvent', 'some data'); });
     },
-    
+
     onConnect() {
-        //debugger
         this.socket.emit('handshake', localStorage['accessPass']);
     },
-    
-    myCustomEvent(data) {
-        this.socket.emit('anotherCustomEvent', 'some data');
-    },
-    
+
     willDestroyElement() {
         this._super(...arguments);
         this.socket.emit('exit', localStorage['accessPass']);
-        //socket.off('message', this.onMessage);
-        //socket.off('myCustomEvent', this.myCustomEvent);
     },
 
     actions: {
@@ -80,14 +73,12 @@ export default Component.extend({
             this.set('challenge', event.word)
         },
         update_state (event) {
-            console.log(event);
             this.set('gameState', event.state)
         },
         update_round_number (event) {
             this.set('rounds', event)
         },
         update_users (event) {
-            debugger
             this.set('users', event.users)
         },
 
@@ -99,7 +90,7 @@ export default Component.extend({
             //if(event.user_id == localStorage[''])
         },
         user_vote (word) {
-            
+
         },
         game_start () {
             console.log('nshoeu')
