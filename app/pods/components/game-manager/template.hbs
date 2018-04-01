@@ -1,9 +1,7 @@
-{{#if isHost}}
-    {{game-host}}
+{{#if (eq name 'host')}}
+    {{game-host data=hostModel}}
 {{else}}
-    {{game-player}}
+    {{game-player data=playerModel}}
 {{/if}}
-{{game-host}}
 
-oeu
 {{yield}}

@@ -8,8 +8,8 @@ export default Component.extend({
         }
     ],
     actions: {
-        moreActions () {
-            
+        startGame () {
+
         }
     }
 });
