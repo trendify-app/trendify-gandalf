@@ -2,11 +2,12 @@ import Component from '@ember/component';
 import computed from '@ember/object';
 
 export default Component.extend({
+  tagName: '',
     items: [
-        {
-            icon: "share",
-            title: "Share"
-        }
+      {
+          icon: "share",
+          title: "Share"
+      }
     ],
     sortedUsers: Ember.computed('users', function () {
       const users = this.get('users');

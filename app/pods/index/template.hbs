@@ -1,11 +1,15 @@
-<div class="header-title layout-column">
-    <div class="title layout-column flex-50">
-        <h1>Trendify</h1>
-    </div>
+{{#paper-toolbar}}
+  {{#paper-toolbar-tools}}
+    <img class='logo' height=30 width=25 src='/assets/tf_logo.png'/>
+    <h2>
+      trendify
+    </h2>
+  {{/paper-toolbar-tools}}
+{{/paper-toolbar}}
 
-    
-    <div class="layout-row layout-xs-column flex start-container flex-20">
-        {{#paper-button onClick=(action "host") raised=true primary=true}}Host{{/paper-button}}
-        {{#paper-button onClick=(action "join") raised=true }}Join{{/paper-button}}
-    </div>
+<div class='host-button'>
+  {{#paper-button onClick=(action "host") raised=true primary=true}}Host{{/paper-button}}
 </div>
+
+{{outlet}}
+<div class='background-content'></div>

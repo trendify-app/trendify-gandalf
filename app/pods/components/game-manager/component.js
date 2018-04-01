@@ -26,19 +26,7 @@ export default Component.extend({
             score: 9001
         }
     ],
-    currentModel: Ember.computed('gameState', 'rounds.@each', 'name', 'trendData', 'users.[]', function() {
-        let x = {
-            gameState: this.get('gameState'),
-            rounds: this.get('rounds'),
-            name: this.get('name'),
-            trendData: this.get('trendData'),
-            users: this.get('users'),
-            challenge: this.get('challenge'),
-            room: localStorage['room_id']
-        }
-        console.log(x)
-        return x
-    }),
+  
     trendData: {},
 
     didInsertElement() {

@@ -1,36 +1,41 @@
 <div class="layout-column">
-    <div class="title layout-row flex-10">
-        <h1>Trendify</h1>
-        <div class="layout-column">
-            <h2 class="flex-10">{{room}}</h2>
-            {{#if (eq gameState 'round')}}
-                {{paper-progress-circular value=(mult (div (moment-diff (now interval=1000) (moment rounds.ends_at)) 1000) (div 100 60))}}
-                {{!-- <h2 class="time">{{floor (div (moment-diff (now interval=1000) (moment data.rounds.ends_at)) 1000)}}</h2> --}}
-            {{/if}}
-        </div>
-    </div>
+  {{! without contextual components }}
+{{#paper-toolbar}}
+  {{#paper-toolbar-tools}}
+    <img class='logo' height=30 width=25 src='/assets/tf_logo.png'/>
+    <h2>
+      trendify - {{room}}
+    </h2>
+  {{/paper-toolbar-tools}}
+{{/paper-toolbar}}
 {{#if (eq gameState 'lobby')}}
     <div class="lobby layout-column layout-align-center">
         <div class="players layout-row layout-align-center flex-50">
+            <h3>Participants</h3>
             {{#each users as |user|}}
                 <span class="player flex">
                   {{user.name}}
                 </span>
             {{/each}}
         </div>
-        <div class="scoreboard layout-column flex-20">
-
-        </div>
         {{paper-divider}}
-        <div class="start-game layout-column flex-20">
+        <div class="start-game">
             {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Start Game{{/paper-button}}
         </div>
     </div>
 {{else if (eq gameState 'round')}}
-    <h1 class="challenge">{{challenge}}</h1>
-    <div class="chart layout-column flex-10">
-        <!-- {{chart-card data=trendData}} -->
-    </div>
+    <h1 class="challenge">{{challenge}}
+      {{#if (eq gameState 'round')}}
+       {{paper-progress-circular
+           value=(mult
+             (div (moment-diff
+               (now interval=1000)
+               (moment rounds.ends_at)) 1000)
+               (div 100 60))
+       }}
+   {{/if}}
+    </h1>
+
 {{else if (eq gameState 'intermission')}}
     <div class="chart layout-column flex-10">
         <!-- {{chart-card data=trendData}} -->

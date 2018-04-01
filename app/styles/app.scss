@@ -1,5 +1,33 @@
 @import 'ember-paper';
 
+.host-button {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
+
+
+.background-content {
+  z-index: -1;
+  position: fixed;
+  top: -20px;;
+  left: -20px;
+  width: calc(100% + 100px);
+  height: calc(100% + 20px);
+  background-image: url("https://designcode.io/cloud/5k-wallpapers/5K%20Wallpaper%206.png");
+  filter: blur(10px);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo {
+  padding-right: 5px;
+}
+
+md-progress-circular {
+  display: inline-block;
+  transform: translateY(10px);
+}
 .title {
     padding-top: 1rem;
     h1 {
@@ -30,7 +58,7 @@
     }
 }
 .header-title {
-    
+
 }
 .game-header {
     font-size: 3rem;
@@ -46,6 +74,8 @@
 }
 
 .start-game {
+  display: flex;
+  justify-content: center;
     padding: 2rem;
     .start-button {
         max-width: 50%;
@@ -54,7 +84,7 @@
         min-width: 160px;
         font-size: 1.5rem;
     }
-} 
+}
 
 .challenge {
     font-size: 3rem;
