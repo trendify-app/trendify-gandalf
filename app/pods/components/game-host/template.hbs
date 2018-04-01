@@ -1,6 +1,13 @@
 <div class="layout-column">
-    <div class="title layout-column flex-10">
+    <div class="title layout-row flex-10">
         <h1>Trendify</h1>
+        <div class="layout-column">
+            <h2 class="flex-10">{{data.room}}</h2>
+            {{#if (eq data.gameState 'round')}}
+                {{paper-progress-circular value=(mult (div (moment-diff (now interval=1000) (moment data.rounds.ends_at)) 1000) (div 100 60))}}
+                {{!-- <h2 class="time">{{floor (div (moment-diff (now interval=1000) (moment data.rounds.ends_at)) 1000)}}</h2> --}}
+            {{/if}}
+        </div>
     </div>
 {{#if (eq data.gameState 'lobby')}}
     <div class="lobby layout-column layout-align-center"> 
@@ -8,6 +15,7 @@
             {{#each data.users as |user|}}
                 <span class="player flex">
                     {{user.name}}
+                    
                 </span>
             {{/each}}
         </div>
@@ -20,11 +28,15 @@
         </div>
     </div>
 {{else if (eq data.gameState 'round')}}
+    <h1 class="challenge">{{data.challenge}}</h1>
     <div class="chart layout-column flex-10">
         {{chart-card data=data.trendData}}
     </div>
     <div class="scoreboard layout-column flex-10">
-        
+        {{#each users as |user|}}
+            {{user.name}}
+            {{user.score}}
+        {{/each}}
     </div>    
 {{else if (eq data.gameState 'intermission')}}
     <div class="chart layout-column flex-10">

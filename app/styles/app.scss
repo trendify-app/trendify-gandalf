@@ -41,7 +41,6 @@
 .players {
     min-height: 50VH;
     .player {
-
         padding: 2rem;
     }
 }
@@ -57,6 +56,11 @@
     }
 } 
 
+.challenge {
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+}
 .ember-application {
     background: rgba(255,255,255,1);
 background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
