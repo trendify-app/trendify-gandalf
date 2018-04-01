@@ -43,8 +43,11 @@
         {{chart-card data=data.trendData}}
     </div>
     <div class="scoreboard layout-column flex-10">
-        
+        {{player-scores users=data.users}}
     </div>  
+    <div class="start-game layout-column flex-20">
+        {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Next Round{{/paper-button}}
+    </div>
 {{/if}}
 </div>
 {{!-- {{#if enrolled}}

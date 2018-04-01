@@ -87,7 +87,8 @@ export default Component.extend({
             this.set('rounds', event)
         },
         update_users (event) {
-            this.set('users', event.mappedUsers)
+            debugger
+            this.set('users', event.users)
         },
 
         update_user (event) {

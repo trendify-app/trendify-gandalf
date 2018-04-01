@@ -3,7 +3,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
     chartData: Ember.computed('data', function() {
-        debugger
+        //debugger
         // let data = this.get('data')
         // let arr = []
         // for(let i = 0; i< data.labels.length;i++ ){
