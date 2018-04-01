@@ -1,1 +1,37 @@
-{{yield}}
+{{#if (eq data.gameState 'lobby')}}
+  <div class="lobby layout-column layout-align-center">
+    <div class="players layout-row layout-align-center flex-50">
+      {{#each data.users as |user|}}
+        <span class="player flex">
+          <div class='pod'>
+            {{user.name}}
+          </div>
+        </span>
+      {{/each}}
+    </div>
+    {{paper-divider}}
+    <div class="start-game layout-column flex-20">
+      {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Start Game{{/paper-button}}
+    </div>
+  </div>
+{{else if (eq data.gameState 'round')}}
+  <h1 class="challenge">{{data.challenge}}</h1>
+  <div class="chart layout-column flex-10">
+    {{chart-card data=data.trendData}}
+  </div>
+  <div class="scoreboard layout-column flex-10">
+    {{#each data.users as |user|}}
+      {{user.name}} {{user.score}}
+    {{/each}}
+  </div>
+  {{else if (eq data.gameState 'intermission')}}
+  <div class="chart layout-column flex-10">
+    {{chart-card data=data.trendData}}
+  </div>
+  <div class="scoreboard layout-column flex-10">
+    {{player-scores users=data.users}}
+  </div>
+  <div class="start-game layout-column flex-20">
+    {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Next Round{{/paper-button}}
+  </div>
+{{/if}}

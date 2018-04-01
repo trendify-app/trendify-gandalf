@@ -14,24 +14,12 @@
           </div>
         {{/if}}
       </div>
+      <div class='context'>
+        {{name}}
+      </div>
       {{/paper-toolbar-tools}}
   {{/paper-toolbar}}
   <div class='content'>
-
-    <div class='header'>
-      {{#if (eq currentModel.gameState 'round')}}
-        <div class='tertiary'>
-          {{paper-progress-circular
-              value=(mult
-                (div (moment-diff
-                  (now interval=1000)
-                  (moment currentModel.rounds.ends_at)) 1000)
-                  (div 100 60))
-          }}
-        </div>
-      {{/if}}
-    </div>
-
     <div class='body'>
       {{#if name}}
         {{#if (eq name 'host')}}

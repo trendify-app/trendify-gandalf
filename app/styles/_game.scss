@@ -1,4 +1,6 @@
 .game {
+  height: 100%;
+
   .header {
     .title {
       display: flex;
@@ -11,6 +13,23 @@
     .secondary {
       flex: 1;
       font-size: 12px;
+    }
+
+    .context {
+      position: absolute;
+      right: 10px;
+      text-transform: uppercase;
+    }
+  }
+  .content {
+    height: 100%;
+    .header {
+      .tertiary {
+        height: 50px;
+      }
+    }
+    .body {
+      height: 100%;
     }
   }
 }

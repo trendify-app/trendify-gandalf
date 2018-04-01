@@ -1,72 +1,11 @@
 @import 'ember-paper';
 @import './game';
+@import './game_host_content';
 
-.start-container {
-    padding: 20% 0% 20% 0%;
-    margin: auto;
-    text-align: center;
-    font-size: 4rem;
-}
-.start-container {
-    width: 30%;
-    justify-content: space-between;
-    .md-button {
-        min-height: 80px;
-        min-width: 160px;
-        font-size: 1.5rem;
-    }
-}
-.header-title {
-
-}
-.game-header {
-    font-size: 3rem;
-    text-align: center;
-
+html, body {
+  height: 100%;
 }
 
-.players {
-    min-height: 50VH;
-    .player {
-        padding: 2rem;
-    }
-}
-
-.start-game {
-    padding: 2rem;
-    .start-button {
-        max-width: 50%;
-        margin: auto;
-        min-height: 80px;
-        min-width: 160px;
-        font-size: 1.5rem;
-    }
-}
-
-.challenge {
-    font-size: 3rem;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.ember-application {
-    background: rgba(255,255,255,1);
-background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(43%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1)));
-background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
-background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
-background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
-background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(242,242,242,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );
+body > .ember-view {
+  height: 100%;
 }
