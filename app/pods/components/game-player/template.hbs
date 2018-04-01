@@ -1,37 +1,62 @@
-{{#if (eq data.gameState 'lobby')}}
-  <div class="lobby layout-column layout-align-center">
-    <div class="players layout-row layout-align-center flex-50">
-      {{#each data.users as |user|}}
-        <span class="player flex">
-          <div class='pod'>
-            {{user.name}}
+<div class='game-player-content'>
+  <div class='sidebar'>
+    <div class='users'>
+      <div class='primary'>
+        Available Users
+      </div>
+      {{paper-divider}}
+      <div class='list'>
+        {{#each data.users as |user|}}
+          <div class='user-item'>
+            <div class='icon'>
+              {{paper-icon 'face'}}
+            </div>
+            <div class='primary'>
+              {{user.name}}
+            </div>
           </div>
-        </span>
-      {{/each}}
+          {{paper-divider}}
+        {{/each}}
+      </div>
     </div>
+
     {{paper-divider}}
-    <div class="start-game layout-column flex-20">
-      {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Start Game{{/paper-button}}
+
+    <div class='admin-panel'>
+      {{#if (eq data.gameState 'lobby')}}
+        <div class='item'>
+          {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Start Game{{/paper-button}}
+        </div>
+      {{/if}}
+      {{#if (eq currentModel.gameState 'round')}}
+        {{paper-progress-circular
+            value=(mult
+              (div (moment-diff
+                (now interval=1000)
+                (moment currentModel.rounds.ends_at)) 1000)
+                (div 100 60))
+        }}
+      {{/if}}
     </div>
   </div>
-{{else if (eq data.gameState 'round')}}
-  <h1 class="challenge">{{data.challenge}}</h1>
-  <div class="chart layout-column flex-10">
-    {{chart-card data=data.trendData}}
+
+  <div class='main'>
+    {{#if (eq data.gameState 'round')}}
+      <div class="challenge">
+        Current word is
+        <span class='current-word'>
+          {{data.challenge}}
+        </span>
+      </div>
+    {{/if}}
+
+    {{#if (eq data.gamestate 'intermission')}}
+      <div class="scoreboard">
+        {{player-scores users=data.users}}
+      </div>
+      <div class="next-round">
+        {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Next Round{{/paper-button}}
+      </div>
+    {{/if}}
   </div>
-  <div class="scoreboard layout-column flex-10">
-    {{#each data.users as |user|}}
-      {{user.name}} {{user.score}}
-    {{/each}}
-  </div>
-  {{else if (eq data.gameState 'intermission')}}
-  <div class="chart layout-column flex-10">
-    {{chart-card data=data.trendData}}
-  </div>
-  <div class="scoreboard layout-column flex-10">
-    {{player-scores users=data.users}}
-  </div>
-  <div class="start-game layout-column flex-20">
-    {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Next Round{{/paper-button}}
-  </div>
-{{/if}}
+</div>

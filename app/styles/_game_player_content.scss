@@ -1,0 +1,48 @@
+.game-player-content {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    border-right: 1px solid black;
+    .users {
+      flex: 8;
+      .primary {
+        text-align: center;
+        font-size: 22px;
+        padding: 10px;
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        .user-item {
+          display: flex;
+          flex-direction: row;
+          padding: 5px;
+          .icon {
+            padding: 5px;
+          }
+          .primary {
+            font-size: 18px;
+            font-weight: 200;
+          }
+        }
+      }
+    }
+    .admin-panel {
+      display: flex;
+      flex-direction: row;
+      flex: 2;
+      .item {
+        flex: 1;
+      }
+    }
+  }
+  .main {
+    display: flex;
+    flex: 5;
+    justify-content: center;
+  }
+}

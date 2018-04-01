@@ -2,6 +2,7 @@
   height: 100%;
 
   .header {
+    height: 80px;
     .title {
       display: flex;
       flex-direction: column;
@@ -22,7 +23,7 @@
     }
   }
   .content {
-    height: 100%;
+    height: calc(100% - 80px);
     .header {
       .tertiary {
         height: 50px;

@@ -28,15 +28,17 @@
           {{#paper-button class="start-button" onClick=startGame raised=true primary=true}}Start Game{{/paper-button}}
         </div>
       {{/if}}
-      {{#if (eq currentModel.gameState 'round')}}
-        {{paper-progress-circular
-            value=(mult
-              (div (moment-diff
-                (now interval=1000)
-                (moment currentModel.rounds.ends_at)) 1000)
-                (div 100 60))
-        }}
-      {{/if}}
+      <div class='item'>
+        {{#if (eq data.gameState 'round')}}
+          {{paper-progress-circular
+              value=(mult
+                (div (moment-diff
+                  (now interval=1000)
+                  (moment currentModel.rounds.ends_at)) 1000)
+                  (div 100 60))
+          }}
+        {{/if}}
+      </div>
     </div>
   </div>
 
