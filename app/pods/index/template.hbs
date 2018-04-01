@@ -1,8 +1,10 @@
-<div class="header layout-column">
-    <h1 class="title flex-30">Trendify</h1>
+<div class="header-title layout-column">
+    <div class="title layout-column flex-50">
+        <h1>Trendify</h1>
+    </div>
 
-    {{paper-divider}}
-    <div class="layout-row layout-xs-column flex start-container flex-70">
+    
+    <div class="layout-row layout-xs-column flex start-container flex-20">
         {{#paper-button onClick=(action "host") raised=true primary=true}}Host{{/paper-button}}
         {{#paper-button onClick=(action "join") raised=true }}Join{{/paper-button}}
     </div>

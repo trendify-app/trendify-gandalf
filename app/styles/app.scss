@@ -1,27 +1,61 @@
 @import 'ember-paper';
 
-
-.header {
-    .title, .start-container {
+.title {
+    padding-top: 1rem;
+    h1 {
         padding: 20% 0% 20% 0%;
         margin: auto;
         text-align: center;
         font-size: 4rem;
+        padding: 1rem;
+        background-color: red;
+        color: white;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     }
-    .start-container {
-        width: 30%;
-        justify-content: space-between;
-        .md-button {
-            min-height: 80px;
-            min-width: 160px;
-            font-size: 1.5rem;
-        }
+}
+
+.start-container {
+    padding: 20% 0% 20% 0%;
+    margin: auto;
+    text-align: center;
+    font-size: 4rem;
+}
+.start-container {
+    width: 30%;
+    justify-content: space-between;
+    .md-button {
+        min-height: 80px;
+        min-width: 160px;
+        font-size: 1.5rem;
     }
+}
+.header-title {
+    
 }
 .game-header {
     font-size: 3rem;
     text-align: center;
+
 }
+
+.players {
+    min-height: 50VH;
+    .player {
+
+        padding: 2rem;
+    }
+}
+
+.start-game {
+    padding: 2rem;
+    .start-button {
+        max-width: 50%;
+        margin: auto;
+        min-height: 80px;
+        min-width: 160px;
+        font-size: 1.5rem;
+    }
+} 
 
 .ember-application {
     background: rgba(255,255,255,1);

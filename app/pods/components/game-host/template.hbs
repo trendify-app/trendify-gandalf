@@ -1,34 +1,55 @@
-{{!-- {{#paper-toolbar}}
-  {{#paper-toolbar-tools}}
-    {{#paper-button iconButton=true}}
-        {{paper-icon "menu"}}
-    {{/paper-button}}
-    <h2>
-      Trendify 
-    </h2>
-    <span class="flex"></span>
-    {{#paper-menu as |menu|}}
-        {{#menu.trigger}}
-            {{#paper-button iconButton=true}}
-                {{paper-icon "more_vert"}}
-            {{/paper-button}}
-        {{/menu.trigger}}
-        {{#menu.content width=2 as |content|}}
-            {{#each items as |item|}}
-            {{#content.menu-item onClick=(action "moreActions" item)}}
-                {{paper-icon item.icon}} {{item.title}}
-            {{/content.menu-item}}
+<div class="layout-column">
+    <div class="title layout-column flex-10">
+        <h1>Trendify</h1>
+    </div>
+{{#if (eq data.gameState 'lobby')}}
+    <div class="lobby layout-column layout-align-center"> 
+        <div class="players layout-row layout-align-center flex-50">
+            {{#each data.users as |user|}}
+                <span class="player flex">
+                    {{user.name}}
+                </span>
             {{/each}}
-        {{/menu.content}}
-    {{/paper-menu}}
-  {{/paper-toolbar-tools}}
-{{/paper-toolbar}} --}}
-
-<h2 class="game-header">
-    Trendify 
-</h2>
-<div class="game-card">
-    <div class=""></div>
+        </div>
+        <div class="scoreboard layout-column flex-20">
+            
+        </div>
+        {{paper-divider}}
+        <div class="start-game layout-column flex-20">
+            {{#paper-button class="start-button" onClick=(action "startGame") raised=true primary=true}}Start Game{{/paper-button}}
+        </div>
+    </div>
+{{else if (eq data.gameState 'round')}}
+    <div class="chart layout-column flex-10">
+        {{chart-card data=data.trendData}}
+    </div>
+    <div class="scoreboard layout-column flex-10">
+        
+    </div>    
+{{else if (eq data.gameState 'intermission')}}
+    <div class="chart layout-column flex-10">
+        {{chart-card data=data.trendData}}
+    </div>
+    <div class="scoreboard layout-column flex-10">
+        
+    </div>  
+{{/if}}
 </div>
+{{!-- {{#if enrolled}}
+    {{#paper-dialog fullscreen=fullscreen onClose=(action "closePromptDialog" "cancel")}}
+
+    {{#paper-dialog-content}}
+      <h2 class="md-title">What will your name be?</h2>
+      {{paper-input placeholder="My Awesome Name" autofocus=true value=name onChange=(action (mut name))}}
+    {{/paper-dialog-content}}
+
+    {{#paper-dialog-actions class="layout-row"}}
+      <span class="flex"></span>
+      {{#paper-button primary=true onClick=(action "closePromptDialog" "ok" dogName)}}Okay!{{/paper-button}}
+    {{/paper-dialog-actions}}
+
+  {{/paper-dialog}}
+{{/if}} --}}
+
 
 {{yield}}
